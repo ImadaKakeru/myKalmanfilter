@@ -1,6 +1,6 @@
 CXX = g++
 CFLAGS = -std=c++11 -Wall -O0 `pkg-config --cflags opencv4` `pkg-config --cflags eigen3`
-LDFLAGS = `pkg-config --libs opencv4` -lm
+LDFLAGS = `pkg-config --libs opencv4` `pkg-config --libs eigen3` -lm
 PROG = proposed
 SRCS = $(wildcard *.cpp)
 # OBJS = $(SRCS:.cpp=.o)

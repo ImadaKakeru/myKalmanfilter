@@ -1,3 +1,6 @@
+#ifndef KALMAN_H
+#define KALMAN_H
+
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include "header.h"
@@ -7,6 +10,8 @@ using namespace Eigen;
 class Kalman{
 
 public:
+    static Point prePosition;
+    // static Point Position;
     static Matrix<float, 4,4> I_4;
     static Matrix<float, 2,2> I_2;
 
@@ -51,7 +56,7 @@ public:
 
     // 単位行列を設定する関数
     static void setIdentityMatrix();
-    static void setInitialMatrix(double dt);
+    static void setInitialMatrix(float dt);
 
     //カルマンフィルタの更新ステップ
     static void updating();
@@ -61,3 +66,5 @@ public:
     //次の時刻での処理に備える。
     static void prepare();
 };
+
+#endif // KALMAN_H

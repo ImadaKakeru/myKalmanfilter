@@ -11,6 +11,7 @@ void procKalman(vector<Point> &KLheads, vector<Point> heads){
         Kalman::predicting();
         Kalman::updating();
         KLheads.push_back(Kalman::getY());
+        Kalman::prepare();
     }
     return;
 }

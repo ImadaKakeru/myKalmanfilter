@@ -24,8 +24,8 @@ int main(void){
     cout << "calculating position error..." << endl;
     calcError(errors, heads, groundTruth);
     errors.clear();
-    
-    cout << "in Kalman filter..." << endl;
+
+    cout << "in Kalman filtering..." << endl;
     procKalman(KLheads, heads);
     calcError(errors, KLheads, groundTruth);
     return 0;

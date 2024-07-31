@@ -1,7 +1,8 @@
 #include "header.h"
 
 void selectMultiEdge(vector<Point> &edges, vector<Point> &ttContours, int size, int num){
-    int fPoint = 0, sPoint = 0;
+    int fPoint = 0;
+    // int sPoint = 0;
     int i = 0;
     int former = 0;
     int latter = 0;

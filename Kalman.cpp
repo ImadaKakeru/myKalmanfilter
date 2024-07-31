@@ -2,6 +2,8 @@
 
 // 静的メンバー変数の定義と初期化
 // 静的メンバー変数の定義と初期化
+Point Kalman::prePosition;
+
 Matrix<float, 4, 4> Kalman::I_4;
 Matrix<float, 2, 2> Kalman::I_2;
 
@@ -42,16 +44,15 @@ Vector4f Kalman::Xtt;
 
 Point Kalman::getY(){
     Vector2f Y_hat = C * Xtt;
-    Point tmp;
-    tmp.x = Y_hat(0);
-    tmp.y = Y_hat(1);
-
-    return tmp;
+    // Point tmp;
+    // tmp.x = Y_hat(0);
+    // tmp.y = Y_hat(1);
+    return Point(Y_hat(0)- prePosition.x, Y_hat(1)- prePosition.y);
 }
 
 void Kalman::setY(Point loc){
-    Yt(0) = loc.x;
-    Yt(1) = loc.y;
+    Yt(0) = prePosition.x + loc.x;
+    Yt(1) = prePosition.y + loc.y;
     return;
 }
 
@@ -60,7 +61,7 @@ void Kalman::setIdentityMatrix(){
     I_2 = Matrix2f::Identity();
 }
 
-void Kalman::setInitialMatrix(double dt){
+void Kalman::setInitialMatrix(float dt){
     Ad << 1,0,dt,0,
           0,1,0,dt,
           0,0,1,0,
@@ -89,6 +90,8 @@ void Kalman::setInitialMatrix(double dt){
 
     // Yt_1t_1 << 320,240;
     Xt_1t_1 << 320,240,0,0;
+
+    prePosition = Point(0,0);
 }
 
 void Kalman::updating(){
@@ -122,5 +125,6 @@ void Kalman::predicting(){
 void Kalman::prepare(){
     Xt_1t_1 = Xtt;
     Pt_1t_1 = Ptt;
+    prePosition = Point(Yt(0), Yt(1));
     return;
 }

@@ -4,9 +4,12 @@
 #include <fstream>
 #include <string>
 #include <stdio.h>
-#include <opencv2/core.hpp>
+
+#define float16_t opencv_broken_float16_t
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#undef float16_t
 
 using namespace cv;
 using namespace std;

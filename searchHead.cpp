@@ -7,7 +7,7 @@ Point searchHead(vector<Point> edges, int d) {
   Point loc;
   double ang;
   int size = edges.size();
-  int index = 0;
+  // int index = 0;
   Point center;
   center.x = Width/4;
   center.y = Height/4;
@@ -25,7 +25,7 @@ Point searchHead(vector<Point> edges, int d) {
     // result.at<uchar>(two.y,two.x) = (int)ang * 180.0 / CV_PI;
     if (ang < angle) {
       // if(norm(center - two) > 200)continue;
-      index = i+d;
+      // index = i+d;
       //std::cout << "ang = " << ang << std::endl;
       angle = ang;
       loc = two;
