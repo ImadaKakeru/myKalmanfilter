@@ -8,6 +8,7 @@ int main(void){
     // image5 頭が見えてる: 0~537
     vector<Mat> images;
     vector<Point> heads;
+    vector<Point> KLheads;
     vector<double> errors;
     vector<Point> groundTruth;
     // string groundTruthPath = "../groundTruth/groundTruth5.csv";
@@ -22,5 +23,10 @@ int main(void){
 
     cout << "calculating position error..." << endl;
     calcError(errors, heads, groundTruth);
+    errors.clear();
+    
+    cout << "in Kalman filter..." << endl;
+    procKalman(KLheads, heads);
+    calcError(errors, KLheads, groundTruth);
     return 0;
 }

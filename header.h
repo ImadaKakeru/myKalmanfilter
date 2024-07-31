@@ -28,3 +28,4 @@ void detectHead(vector<Mat> images, vector<Point> &heads);
 void calcError(vector<double> &errors, vector<Point> &heads, vector<Point> &groundTruth);
 void readGT(string path, vector<Point> &groundTrtuth);
 void selectMultiEdge(vector<Point> &edges, vector<Point> &ttContours, int size, int num);
+void procKalman(vector<Point> &KLheads, vector<Point> heads);
