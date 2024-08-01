@@ -10,16 +10,16 @@ OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 .PHONY:all
 all:$(PROG)
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.cpp | $(OBJDIR)
-	$(CXX) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CFLAGS) -c $< -o $@
 # .SUFFIXES: .o .cpp
 # .cpp.o:
 # 	$(CXX) $(CFLAGS) -c $<
 
 $(PROG): $(OBJS)
-	$(CXX) -o $@ $^ $(LDFLAGS)
+	@$(CXX) -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean
 clean:

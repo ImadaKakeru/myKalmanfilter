@@ -18,6 +18,7 @@ using namespace std;
 #define Height 480
 #define inputPath "../../dataSet/image4/img"
 #define groundTruthPath "../groundTruth/groundTruth4.csv"
+#define outputPath "./errorCSV/error4.csv"
 double calcAngle(Point &pt1, Point &pt2, Point &pt3);
 Point searchHead(vector<Point> edges, int d);
 void selectEdge(vector<Point> &edges, vector<Point> &ttContours, int size);
@@ -32,3 +33,4 @@ void calcError(vector<double> &errors, vector<Point> &heads, vector<Point> &grou
 void readGT(string path, vector<Point> &groundTrtuth);
 void selectMultiEdge(vector<Point> &edges, vector<Point> &ttContours, int size, int num);
 void procKalman(vector<Point> &KLheads, vector<Point> heads);
+void saveData(vector<double> &errorsNomal, vector<double> &errorsKalman, string Path);

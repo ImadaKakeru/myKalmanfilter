@@ -9,7 +9,8 @@ int main(void){
     vector<Mat> images;
     vector<Point> heads;
     vector<Point> KLheads;
-    vector<double> errors;
+    vector<double> errorsNormal;
+    vector<double> errorsKalman;
     vector<Point> groundTruth;
     // string groundTruthPath = "../groundTruth/groundTruth5.csv";
     cout << "getting images..." << endl;
@@ -22,11 +23,16 @@ int main(void){
     readGT(groundTruthPath, groundTruth);
 
     cout << "calculating position error..." << endl;
-    calcError(errors, heads, groundTruth);
-    errors.clear();
+    calcError(errorsNormal, heads, groundTruth);
 
     cout << "in Kalman filtering..." << endl;
     procKalman(KLheads, heads);
-    calcError(errors, KLheads, groundTruth);
+    calcError(errorsKalman, KLheads, groundTruth);
+
+    cout << "saving data..." << endl;
+    saveData(errorsNormal, errorsKalman,outputPath);
+
+    errorsNormal.clear();
+    errorsKalman.clear();
     return 0;
 }

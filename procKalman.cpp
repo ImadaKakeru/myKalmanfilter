@@ -12,9 +12,10 @@ void procKalman(vector<Point> &KLheads, vector<Point> heads){
         Kalman::predicting();
         Kalman::updating();
         KLheads.push_back(Kalman::getY());
-        cout << "observed Position = " << heads[i] << endl;
-        cout << "filtered Position = " << Kalman::getY() << endl;
+        // cout << "observed Position = " << heads[i] << endl;
+        // cout << "filtered Position = " << Kalman::getY() << endl;
         Kalman::prepare();
     }
+    // cout << "matrix P = " << Kalman::Ptt << endl;
     return;
 }

@@ -72,8 +72,8 @@ void Kalman::setInitialMatrix(float dt){
          0,1,0,0;   
     C_t = C.transpose();
 
-    R << 1,0,
-         0,1;
+    R << 0.1,0,
+         0,0.1;
     
     w_k << 1,0,
            0,1;
