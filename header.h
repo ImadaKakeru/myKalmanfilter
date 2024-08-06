@@ -16,8 +16,8 @@ using namespace std;
 
 #define Width 640
 #define Height 480
-#define inputPath "../../dataSet/image4/img"
-#define groundTruthPath "../groundTruth/groundTruth4.csv"
+#define inputPath "../../dataSet/image6/img"
+#define groundTruthPath "../groundTruth/groundTruth6.csv"
 #define outputPath "./errorCSV/error4.csv"
 double calcAngle(Point &pt1, Point &pt2, Point &pt3);
 Point searchHead(vector<Point> edges, int d);
