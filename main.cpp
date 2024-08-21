@@ -3,7 +3,7 @@
 int main(void){
     vector<Point> contours;
     Point head;
-    int frameNum = 250;
+    int frameNum = 5;
     // image5:0~603
     // image5 頭が見えてる: 0~537
     vector<Mat> images;

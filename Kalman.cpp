@@ -51,8 +51,11 @@ Point Kalman::getY(){
 }
 
 void Kalman::setY(Point loc){
+    cout << "loc = " << loc << endl;
     Yt(0) = prePosition.x + loc.x;
     Yt(1) = prePosition.y + loc.y;
+    cout << "Yt" << endl;
+    cout << Yt << endl;
     return;
 }
 
@@ -82,6 +85,12 @@ void Kalman::setInitialMatrix(float dt){
          0,1,0,0,
          0,0,1,0,
          0,0,0,1;
+        // 論文より引用
+    // Q << pow(dt,3)/3,0,pow(dt,2)/2,0,
+    //      0,pow(dt,3)/3,0,pow(dt,2)/2,
+    //      pow(dt,2)/2,0,dt,0,
+    //      0,pow(dt,2)/2,0,dt;
+    // Q *= sqrt(0.7);
     
     Pt_1t_1 << 1,0,0,0,
                0,1,0,0,
@@ -89,7 +98,7 @@ void Kalman::setInitialMatrix(float dt){
                0,0,0,1;
 
     // Yt_1t_1 << 320,240;
-    Xt_1t_1 << 320,240,0,0;
+    Xt_1t_1 << 0,0,0,0;
 
     prePosition = Point(0,0);
 }
@@ -97,7 +106,10 @@ void Kalman::setInitialMatrix(float dt){
 void Kalman::updating(){
     // 予測誤差、観測後差の和の更新
     S = R + C * Ptt_1 * C_t; 
-
+    // if(S.determinant() < 0){
+    //     cout << "S0 is negative" << endl;
+    //     exit(-1);
+    // }
     // カルマンゲインの更新
     Kt = Ptt_1 * C_t * S.inverse();
 
@@ -106,25 +118,41 @@ void Kalman::updating(){
     
     // 状態変数Xの更新
     Xtt = Xtt_1 + Kt * (Yt - Ytt_1);
-
+    cout << "Xtt "<< endl;
+    cout << Xtt << endl;
     return;
 }
 
 void Kalman::predicting(){
     // 現在の時刻における状態の期待値
     Xtt_1 = Ad * Xt_1t_1;
-
+    cout << "Xtt_1" << endl;
+    cout << Xtt_1 << endl;
     // 観測値の予測値
     Ytt_1 = C * Xtt_1;
-
+    // cout << "Ytt_1 = " << Ytt_1 << endl;
     // 予測誤差の共分散行列
     Ptt_1 = Ad * Pt_1t_1 * Ad_t + Q;
+    cout << "Ptt_1" << endl;
+    cout << Ptt_1 << endl;
     return;
 }
 
+// void Kalman::prepare(){
+//     Xt_1t_1 = Xtt;
+//     Pt_1t_1 = Ptt;
+    
+//     prePosition = Point(Yt(0), Yt(1));
+//     return;
+// }
+
+//修正版
 void Kalman::prepare(){
     Xt_1t_1 = Xtt;
     Pt_1t_1 = Ptt;
-    prePosition = Point(Yt(0), Yt(1));
+    // cout << "Xtt = " << Xtt << endl;
+    Vector2f Yhat = C * Xtt;
+    // prePosition = Point(prePosition.x + Yt(0), prePosition.y + Yt(1));
+    prePosition = Point(Yhat(0), Yhat(1));
     return;
 }
